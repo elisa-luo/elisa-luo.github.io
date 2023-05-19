@@ -13,7 +13,7 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li {
   }
 
   .image-container {
-    padding: 10px; /* or margin: 20px; */
+    padding: 5px; /* or margin: 20px; */
   }
 
   .container {
