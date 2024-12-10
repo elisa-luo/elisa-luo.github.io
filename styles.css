@@ -1,61 +1,101 @@
-/* Reset some default browser styles */
-body, h1, h2, h3, h4, h5, h6, p, ul, li {
-    margin: 50;
-    padding: 50;
-  }
-  
-  /* Set some global styles */
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
-    background-color: #f1f1f1;
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.65;
+    margin: 0;
     color: #333;
-  }
-
-  .image-container {
-    padding: 5px; /* or margin: 20px; */
-  }
-
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0px;
+    background-color: #f8f9fa;
   }
   
   header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+    background: linear-gradient(180deg, #009e9e, #005f5f);
+    color: white;
+    padding: 20px 0;
+    position: static;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  header .logo {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
   }
   
   nav ul {
-    list-style-type: none;
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    list-style: none;
     padding: 0;
+    font-size: 18px;
   }
   
   nav ul li {
-    display: inline-block;
-    margin-right: 10px;
+    margin: 0 18px;
   }
   
   nav ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
+    font-weight: 700;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
   }
   
   main {
-    padding: 20px;
+    padding: 20px 0;
+    font-size: 18px;
   }
   
-  section {
-    margin-bottom: 30px;
+  .section {
+    padding: 20px 0;
+    font-size: 20px;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: auto;
+    padding: 0 15px;
+  }
+  
+  .profile-pic {
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+    width: 150px;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery img:hover {
+    transform: scale(1.05);
   }
   
   footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+    background: #333;
+    color: white;
     text-align: center;
+    padding: 10px 0;
+  }
+  
+  .profile-pic-large {
+    width: 250px; /* Adjust size */
+    height: auto;
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
   }
   
