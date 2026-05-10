@@ -1,161 +1,529 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elisa Luo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Elisa Luo — security and privacy measurement researcher." />
+  <style>
+    :root {
+      --bg: #fbfbf8;
+      --ink: #101010;
+      --muted: #6b6b63;
+      --soft: #ecece4;
+      --accent: #d63f1f;
+      --accent-dark: #8f2413;
+      --blue: #1f4fff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(16,16,16,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(16,16,16,0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+      text-decoration-color: rgba(214, 63, 31, 0.45);
+    }
+
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .name {
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      font-size: 1.3rem;
+      text-decoration: none;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--soft);
+      border-radius: 999px;
+      background: rgba(251, 251, 248, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-center a {
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    .nav-center a:hover {
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    main { padding: 32px 0 72px; }
+
+    .hero {
+      min-height: 70vh;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 58px;
+      align-items: end;
+      padding: 44px 0 78px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 22px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(4.6rem, 15vw, 13.2rem);
+      line-height: 0.78;
+      letter-spacing: -0.055em;
+      max-width: 900px;
+    }
+
+    .dek {
+      max-width: 720px;
+      margin: 36px 0 0;
+      font-size: clamp(1.25rem, 2.2vw, 1.72rem);
+      line-height: 1.28;
+      letter-spacing: -0.035em;
+    }
+
+    .dek strong {
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    .side-panel {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .portrait {
+      border-radius: 999px 999px 28px 28px;
+      overflow: hidden;
+      background: var(--soft);
+      aspect-ratio: 3 / 4;
+      border: 1px solid var(--soft);
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .bio-note {
+      padding: 22px;
+      border: 1px solid var(--soft);
+      border-radius: 28px;
+      background: rgba(255,255,255,0.54);
+      color: var(--muted);
+    }
+
+    .links {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 26px;
+      padding: 7px;
+      border: 1px solid rgba(236, 236, 228, 0.95);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: 0 18px 48px rgba(16, 16, 16, 0.055);
+      backdrop-filter: blur(14px);
+    }
+
+    .pill,
+    .email-text {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 15px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .pill {
+      color: var(--muted);
+      font-weight: 760;
+      font-size: 0.92rem;
+    }
+
+    .pill:hover {
+      color: var(--ink);
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(16, 16, 16, 0.075);
+      transform: translateY(-1px);
+    }
+
+    .email-text {
+      gap: 7px;
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.62);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+
+    .email-text a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .email-text:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(143, 36, 19, 0.18);
+    }
+
+    .personality-line {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      letter-spacing: -0.015em;
+    }
+
+    .personality-line strong {
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .me {
+      color: var(--ink);
+      font-weight: 850;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 34px;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.6vw, 3.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 640px;
+      font-size: 1.08rem;
+    }
+
+    .pubs {
+      display: grid;
+      gap: 18px;
+    }
+
+    .pub {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 30px;
+      padding: 24px;
+      border: 1px solid var(--soft);
+      border-radius: 28px;
+      background: rgba(255,255,255,0.58);
+    }
+
+    .venue {
+      color: var(--blue);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.16rem;
+    }
+
+    .pub h3 {
+      margin: 0 0 8px;
+      font-size: 1.22rem;
+      letter-spacing: -0.025em;
+      line-height: 1.22;
+    }
+
+    .pub p { margin: 0; color: var(--muted); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .compact-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .compact-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .date {
+      color: var(--accent);
+      font-weight: 850;
+      font-size: 0.9rem;
+    }
+
+    .compact-item h3,
+    .compact-item p {
+      margin: 0;
+    }
+
+    .compact-item h3 {
+      font-size: 1rem;
+      letter-spacing: -0.018em;
+    }
+
+    .compact-item p { color: var(--muted); }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr 0.85fr;
+      grid-auto-rows: 240px;
+      gap: 16px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+      background: var(--soft);
+      border: 1px solid var(--soft);
+    }
+
+    .gallery img:first-child {
+      grid-row: span 2;
+    }
+
+    footer {
+      padding: 40px 0 54px;
+      color: var(--muted);
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      nav { grid-template-columns: 1fr auto; }
+      .nav-center { display: none; }
+      .nav-right { display: none; }
+      .hero,
+      .section-title,
+      .research-row,
+      .pub,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .hero { min-height: auto; gap: 34px; align-items: start; }
+      .side-panel { max-width: 380px; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 190px; }
+      .gallery img:first-child { grid-row: span 1; grid-column: span 2; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      header { padding: 18px 0; }
+      main { padding-top: 6px; }
+      .hero { padding-top: 24px; }
+      .links {
+        width: 100%;
+        border-radius: 24px;
+        justify-content: flex-start;
+      }
+      .email-text {
+        width: 100%;
+        justify-content: center;
+      }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery img:first-child { grid-column: span 1; }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1 class="logo">Elisa Luo</h1>
-    <nav>
-      <ul>
-        <li><a href="#bio">Bio</a></li>
-        <li><a href="#projects">Research</a></li>
-        <li><a href="#edu">Education</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-      </ul>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="name" href="#top">Elisa Luo</a>
+      <div class="nav-center">
+        <a href="#publications">Publications</a>
+        <a href="#talks">Talks</a>
+        <a href="#gallery">Elsewhere</a>
+        </div>
     </nav>
   </header>
-  
-  <main>
-    <section id="bio" class="section">
-      <div class="container">
-        <img src="images/me.png" alt="Elisa Photo" class="profile-pic-large">
-        <div>
-          <p>
-            <!-- Hi! <strong>My name is Elisa. </strong> -->
-            <!-- If you're a human, welcome to my page!  -->
-            <!-- If you're not a human, then please see here for all my data, which is what I assume you came to my page for: aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==! -->
-          </p>
-          <p>
-            Hi! <strong>My name is Elisa. </strong>
-            I am a third-year PhD student at <b>UC San Diego</b> in the CSE department advised by 
-            <a href="https://cseweb.ucsd.edu/~savage/">Stefan Savage</a> and 
-            <a href="https://cseweb.ucsd.edu/~voelker/">Geoff Voelker</a>.
-            <!-- I am part of the <a href="https://www.sysnet.ucsd.edu/sysnet/">Sysnet</a> and 
-            <a href="https://www.sysnet.ucsd.edu/cryptosec/">Cryptosec</a> groups.  -->
-            <!-- Broadly speaking, I do security measurement research. 
-            Currently, I'm working on some web privacy and copyright projects. I've also worked on several projects in the enterprise security space. -->
-          </p>
-          <p>
-            Broadly, my work is on empirical measurements of security and privacy related topics. Recently, my focus has been on browser fingerprinting and other web privacy issues.
-            <!-- Broadly, I do research pertaining to <b>empirical measurements of security</b> and privacy related topics. Recently, I've worked on projects related to web scraping and copyright issues, online privacy, and enterprise security. -->
-          </p>
-          <p>
-            Outside of research, I'm a semi-pro <a href="https://www.procyclingstats.com/rider/elisa-luo">cyclist</a>. 
-            I was also a Division 1 rower when I was doing my undergrad at Columbia.
-          </p>
-          <p><strong>Contact me:</strong> e4luo (at) ucsd (dot) edu</p>
-          <p><a href="https://scholar.google.com/citations?user=iybSu7YAAAAJ&hl=en"><strong>Google Scholar</strong></a></p>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="intro-title">
+      <div>
+        <span class="kicker">web privacy · measurement · security</span>
+        <h1 id="intro-title">Elisa<br />Luo</h1>
+        <p class="dek">
+          I’m a PhD student at UC San Diego, advised by <a href="https://cseweb.ucsd.edu/~savage/" target="_blank" rel="noopener">Stefan Savage</a> and <a href="https://cseweb.ucsd.edu/~voelker/" target="_blank" rel="noopener">Geoff Voelker</a>, working on <strong>empirical security and privacy measurement</strong>, with a recent focus on <strong>commercial browser fingerprinting</strong> and <strong>modern Web tracking</strong> in practice.
+        </p>
+        <div class="links" aria-label="Profile links">
+          <span class="email-text">Email: <a href="mailto:e4luo@ucsd.edu">e4luo@ucsd.edu</a></span>
+          <a class="pill" href="https://scholar.google.com/citations?user=iybSu7YAAAAJ&hl=en&authuser=1" target="_blank" rel="noopener">Scholar</a>
+          <a class="pill" href="https://github.com/elisa-luo" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <p class="personality-line">Can usually be found <strong>reverse-engineering something new</strong>, racing bikes, or eating oatmeal.</p>
+      </div>
+
+      <aside class="side-panel" aria-label="Bio summary">
+        <div class="portrait">
+          <img src="images/me.png" alt="Elisa Luo" />
+        </div>
+      </aside>
+    </section>
+
+    <section id="publications" aria-labelledby="pub-title">
+      <div class="section-title">
+        <h2 id="pub-title">Publications</h2>
+      </div>
+
+      <div class="pubs">
+        <article class="pub">
+          <div class="venue">WWW ’26</div>
+          <div>
+            <h3><a href="https://dl.acm.org/doi/abs/10.1145/3774904.3792687" target="_blank" rel="noopener">Understanding Server-side Commercial Fingerprinting</a></h3>
+            <p><span class="me">Elisa Luo</span>, Tom Ritter, Stefan Savage, Geoff Voelker. ACM Web Conference 2026 (WWW 2026). To appear.</p>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="venue">IMC ’25</div>
+          <div>
+            <h3><a href="https://dl.acm.org/doi/10.1145/3730567.3764500" target="_blank" rel="noopener">Canvassing the Fingerprinters: Characterizing Canvas Fingerprinting Use Across the Web</a></h3>
+            <p><span class="me">Elisa Luo</span>, Tom Ritter, Stefan Savage, Geoff Voelker. ACM Internet Measurement Conference 2025 (IMC 2025).</p>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="venue">IMC ’25</div>
+          <div>
+            <h3><a href="https://arxiv.org/pdf/2411.15091" target="_blank" rel="noopener">Somesite I Used To Crawl: Awareness, Agency and Efficacy in Protecting Content Creators From AI Crawlers</a></h3>
+            <p>Enze Liu*, <span class="me">Elisa Luo*</span>, Shawn Shan, Geoffrey M. Voelker, Ben Y. Zhao, Stefan Savage. ACM Internet Measurement Conference 2025 (IMC 2025). *Equal contribution.</p>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="venue">S&amp;P ’25</div>
+          <div>
+            <h3><a href="https://doi.ieeecomputersociety.org/10.1109/SP61157.2025.00076" target="_blank" rel="noopener">Understanding the Efficacy of Security Training in Practice</a></h3>
+            <p>Grant Ho, Ariana Mirian, <span class="me">Elisa Luo</span>, Khang Tong, Euyhyun Lee, Lin Liu, Christopher A. Longhurst, Christian Dameff, Stefan Savage, Geoffrey M. Voelker. IEEE Symposium on Security and Privacy 2025 (S&amp;P 2025).</p>
+          </div>
+        </article>
+        <article class="pub">
+          <div class="venue">PAM ’25</div>
+          <div>
+            <h3><a href="https://arxiv.org/pdf/2412.12403" target="_blank" rel="noopener">Characterizing the Networks Sending Enterprise Phishing Emails</a></h3>
+            <p><span class="me">Elisa Luo</span>, Liane Young, Grant Ho, M. H. Afifi, Marco Schweighauser, Ethan Katz-Bassett, Asaf Cidon. Passive and Active Measurement Conference 2025 (PAM 2025).</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="talks" aria-labelledby="talks-title">
+      <div>
+        <div class="section-title">
+          <h2 id="talks-title">Talks</h2>
+        </div>
+        <div class="compact-list">
+          <article class="compact-item">
+            <div class="date">2025</div>
+            <div>
+              <h3><a href="https://datatracker.ietf.org/meeting/123/session/maprg" target="_blank" rel="noopener">IETF-123 MAPRG</a></h3>
+              <p>“Somesite I Used To Crawl.” <a href="https://datatracker.ietf.org/meeting/123/materials/slides-123-maprg-somesite-i-used-to-crawl-awareness-agency-and-efficacy-in-protecting-content-creators-from-ai-crawlers-00" target="_blank" rel="noopener">Slides</a> · <a href="https://youtu.be/SHMoU3qiBms?si=GYJdIgFchf_TQtOv&t=1156" target="_blank" rel="noopener">Recording</a></p>
+            </div>
+          </article>
+          <article class="compact-item">
+            <div class="date">2025</div>
+            <div>
+              <h3><a href="https://surf.mozilla.org/events/2025/sandiego/" target="_blank" rel="noopener">Mozilla Security Research Summit</a></h3>
+              <p>“Characterizing Canvas Fingerprinting Across the Web.”</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="projects" class="section">
-      <div class="container">
-        <h2>Publications</h2>
-        <p>
-          <strong>[WWW '26] </strong><strong><a href="https://dl.acm.org/doi/abs/10.1145/3774904.3792687">Understanding Server-side Commercial Fingerprinting"</a></strong>. 
-          <br><strong><span style="color: #005f5f">Elisa Luo</span></strong>, Tom Ritter, Stefan Savage, Geoff Voelker.
-          <br><i>ACM Web Conference 2026.</i> (To Appear)
-        </p>
-        <p>
-          <strong>[IMC '25] </strong><strong><a href="https://elisa-luo.github.io/canvas-paper.pdf">"Canvassing the Fingerprinters: Characterizing Canvas Fingerprinting Use Across the Web"</a></strong>. 
-          <br><strong><span style="color: #005f5f">Elisa Luo</span></strong>, Tom Ritter, Stefan Savage, Geoff Voelker.
-          <br><i>ACM Internet Measurement Conference (IMC) 2025.</i>
-        </p>
-        <p>
-          <strong>[IMC '25] </strong><strong><a href="https://arxiv.org/pdf/2411.15091">"Somesite I Used To Crawl: Awareness, Agency and Efficacy in Protecting Content Creators From AI Crawlers"</a></strong>. 
-          <br>Enze Liu*, <strong><span style="color: #005f5f">Elisa Luo*</span></strong>, Shawn Shan, Geoffrey M. Voelker, Ben Y. Zhao, Stefan Savage <br>(*Equal contribution). 
-          <br><i>ACM Internet Measurement Conference (IMC) 2025.</i>
-          <!-- <i>Available: <a href="https://arxiv.org/pdf/2411.15091">arxiv.org/pdf/2411.15091</a></i>. (To Appear) -->
-        </p>
-        <p>
-          <strong>[S&P '25] </strong><strong><a href="https://doi.ieeecomputersociety.org/10.1109/SP61157.2025.00076">"Understanding the Efficacy of Security Training in Practice"</a></strong>. <br>Grant Ho, Ariana Mirian, <strong><span style="color: #005f5f">Elisa Luo</span></strong>, Khang Tong, Euyhyun Lee, Lin Liu, Christopher A. Longhurst, Christian Dameff, Stefan Savage, and Geoffrey M. Voelker. 
-          <br><i>IEEE Symposium on Security and Privacy (S&P), 2025.</i> 
-          <!-- <i>Available: <a href="https://doi.ieeecomputersociety.org/10.1109/SP61157.2025.00076">arxiv.org/pdf/2412.12403</a></i> -->
-        </p>
-        <p><strong>[PAM '25] </strong><strong><a href="https://arxiv.org/pdf/2412.12403">"Characterizing the Networks Sending Enterprise Phishing Emails"</a></strong>. <strong><span style="color: #005f5f">
-          <br>Elisa Luo</span></strong>, Liane Young, Grant Ho, M. H. Afifi, Marco Schweighauser, Ethan Katz-Bassett & Asaf Cidon. 
-          <br><i>Passive and Active Measurement Conference (PAM), 2025.</i>
-        </p>
-        <h2>Preprints</h2>
-        <p>
-          <strong>[Under Submission]</strong> <strong><a href="https://arxiv.org/pdf/2410.01107">"Count of Monte Crypto: Accounting-based Defenses for Cross-Chain Bridges"</a></strong>. 
-          <br>Enze Liu, <strong><span style="color: #005f5f">Elisa Luo</span></strong>, Jian Chen Yan, Katherine Izhikevich, Stewart Grant, Deian Stefan, Geoffrey M Voelker, Stefan Savage. 
-          <br><i>Available: <a href="https://arxiv.org/pdf/2410.01107">arxiv.org/pdf/2410.01107</a></i>
-        </p>
-        <h2>Invited Talks</h2>
-        <p>
-          <strong><a href="https://datatracker.ietf.org/meeting/123/session/maprg#autoid-2">IETF-123 maprg</a> (Measurement and Analysis for Protocols)</strong> "Somesite I Used To Crawl: Awareness, Agency and Efficacy in Protecting Content Creators From AI Crawlers". 
-          <br><i><a href="https://datatracker.ietf.org/meeting/123/materials/slides-123-maprg-somesite-i-used-to-crawl-awareness-agency-and-efficacy-in-protecting-content-creators-from-ai-crawlers-00">🪧 Slides</a></i>
-          <br><i><a href="https://youtu.be/SHMoU3qiBms?si=GYJdIgFchf_TQtOv&t=1156">📹 Recording</a></i>
-        </p>
-        <p>
-          <strong><a href="https://surf.mozilla.org/events/2025/sandiego/">Mozilla Security Research Summit 2025</a></strong> "Characterizing Canvas Fingerprinting Across the Web"
-        </p>
+    <section id="gallery" aria-labelledby="gallery-title">
+      <div class="section-title">
+        <h2 id="gallery-title">Elsewhere</h2>
+        <p>Outside the lab, I’m a semi-pro cyclist racing for <a href="https://www.monarch-racing.com/" target="_blank" rel="noopener">Monarch Racing</a> this year, and a former Division I rower at Columbia.</p>
       </div>
-    </section>
-
-    <section id="edu" class="section">
-      <div class="container">
-        <h2>Education</h2>
-        <p>
-          I earned my <strong>Bachelor's of Science</strong> (in Computer Science) from <strong>Columbia University</strong>, where I was fortunate enough to be advised by 
-          <a href="https://www.asafcidon.com">Asaf Cidon</a> and 
-          <a href="http://www.columbia.edu/~ebk2141/">Ethan Katz-Bassett</a>.
-        </p>
-      </div>
-    </section>
-
-    <section id="news" class="section">
-      <div class="container">
-        <h2>News</h2>
-        <p><strong>January 2026:</strong> HNY! Our paper on commercial fingerprinting services was accepted to WWW 2026! (Acceptance rate: 20.1%)</p>
-        <p><strong>August 2025:</strong> 🎉 2 for 1 special! Our paper on Canvas Fingerprinting was also accepted to IMC 2025!</p>
-        <p><strong>July 2025:</strong> I presented our paper on protecting content creators from AI crawlers at IEFT-123!</p>
-        <p><strong>March 2025:</strong> Our paper, "Somesite I Used To Crawl: Awareness, Agency and Efficacy in Protecting Content Creators From AI Crawlers", was accepted to IMC 2025!</p>
-        <p><strong>November 2024:</strong> Our paper, "Characterizing the Networks Sending Enterprise Phishing Emails", was accepted into PAM 2025!</p>
-        <p><strong>September 2024:</strong> Our paper, "Understanding the Efficacy of Security Training in Practice", was accepted into Oakland (S&P) 2025!</p>
-        <p>
-            <strong>September 2023:</strong> I started my PhD at UCSD!
-          </p>
-          <p>
-            <strong>May 2023:</strong> I graduated <em> Magna Cum Laude </em> from Columbia Engineering!
-          </p>
-      </div>
-    </section>
-
-    <section id="awards" class="section">
-        <div class="container">
-          <h2>Awards</h2>
-          <p><strong>All-Ivy First Team</strong>. Ivy League Rowing Championships, Worcester, MA. May 2023.</p>
-          <p><strong>School of Engineering and Applied Science Scholar Athlete Award</strong>. Fu Foundation School of Engineering and Applied Science, Columbia University. May 2023.</p>
-      </section>
-
-    <section id="gallery" class="section">
-      <div class="container">
-        <h2>Photo Gallery</h2>
-        <div class="gallery">
-          <!-- <img src="images/grav-min.png" alt="Gravel bike"> -->
-          <!-- <img src="images/row-min.png" alt="Rowing team"> -->
-          <!-- <img src="images/sus-min.JPG" alt="Sunset view"> -->
-          <img src="images/nats.png" alt="nationals 2024">
-          <img src="images/victorvalley.jpg" alt="Victor valley 2024">
-          <img src="images/cup-min.png" alt="woodbury cup 2023">
-          <img src="images/henley.png" alt="henley 2023">
-          <!-- <img src="images/grad.png" alt="grad"> -->
-        </div>
+      <div class="gallery">
+        <img src="images/race.jpg" alt="Gallery image 1" />
+        <img src="images/cup-min.png" alt="Gallery image 2" />
+        <img src="images/ucsd.JPG" alt="Gallery image 3" />
+        <img src="images/bike1.jpg" alt="Gallery image 4" />
+        <img src="images/row-min.png" alt="Gallery image 5" />
       </div>
     </section>
   </main>
-  
+
   <footer>
-    <p>© 2025 Elisa Luo. All rights reserved.</p>
+    <div class="wrap">
+      <span>© 2026 Elisa Luo</span>
+    </div>
   </footer>
 </body>
 </html>
