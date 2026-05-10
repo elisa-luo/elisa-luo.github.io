@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog · Elisa Luo</title>
+  <meta name="description" content="Writing by Elisa Luo on security, privacy, measurement, web tracking, research, and bikes." />
+  <style>
+    :root {
+      --bg: #fbfbf8;
+      --ink: #101010;
+      --muted: #6b6b63;
+      --soft: #ecece4;
+      --accent: #d63f1f;
+      --accent-dark: #8f2413;
+      --blue: #1f4fff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(16,16,16,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(16,16,16,0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+      text-decoration-color: rgba(214, 63, 31, 0.45);
+    }
+
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header { padding: 28px 0; }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .name {
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      font-size: 1.3rem;
+      text-decoration: none;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--soft);
+      border-radius: 999px;
+      background: rgba(251, 251, 248, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-center a {
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    .nav-center a:hover,
+    .nav-center a.active {
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    main { padding: 32px 0 72px; }
+
+    .blog-hero {
+      padding: 76px 0 78px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 22px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(4.6rem, 14vw, 12.2rem);
+      line-height: 0.8;
+      letter-spacing: -0.07em;
+      max-width: 980px;
+    }
+
+    .dek {
+      max-width: 760px;
+      margin: 34px 0 0;
+      font-size: clamp(1.2rem, 2.1vw, 1.6rem);
+      line-height: 1.28;
+      letter-spacing: -0.03em;
+      color: var(--muted);
+    }
+
+    .dek strong {
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 34px;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.6vw, 3.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 640px;
+      font-size: 1.08rem;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .category-card {
+      padding: 26px;
+      border: 1px solid var(--soft);
+      border-radius: 28px;
+      background: rgba(255,255,255,0.58);
+    }
+
+    .category-card span {
+      display: inline-block;
+      margin-bottom: 18px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    .category-card h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .category-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .post-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .post {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 30px;
+      padding: 24px;
+      border: 1px solid var(--soft);
+      border-radius: 28px;
+      background: rgba(255,255,255,0.58);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .post:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 48px rgba(16, 16, 16, 0.055);
+      border-color: rgba(214, 63, 31, 0.22);
+    }
+
+    .date {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-size: 0.92rem;
+    }
+
+    .date.general {
+      color: var(--accent-dark);
+      background: rgba(214, 63, 31, 0.10);
+    }
+
+    .date.research {
+      color: var(--blue);
+      background: rgba(31, 79, 255, 0.10);
+    }
+
+    .date.cycling {
+      color: #137a4b;
+      background: rgba(19, 122, 75, 0.11);
+    }
+
+    .post h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.25rem, 2vw, 1.72rem);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .post h3 a {
+      text-decoration: none;
+    }
+
+    .post p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(236, 236, 228, 0.8);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .empty-note {
+      padding: 28px;
+      border: 1px dashed rgba(107, 107, 99, 0.35);
+      border-radius: 28px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.45);
+    }
+
+    footer {
+      padding: 40px 0 54px;
+      color: var(--muted);
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .nav-center { display: none; }
+      .section-title,
+      .post,
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      header { padding: 18px 0; }
+      main { padding-top: 6px; }
+      .blog-hero { padding-top: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="name" href="index.html">Elisa Luo</a>
+      <div class="nav-center">
+        <a href="index.html#publications">Publications</a>
+        <a href="index.html#talks">Talks</a>
+        <a href="index.html#gallery">Elsewhere</a>
+        <a class="active" href="blog.html">Blog</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="blog-hero" aria-labelledby="blog-title">
+      <span class="kicker">research · cycling · everything in between</span>
+      <h1 id="blog-title">Blog</h1>
+      <p class="dek">
+        A mix of research notes, race reports, training thoughts, and occasional tangents — plus an excuse to practice writing.
+      </p>
+    </section>
+
+    <section aria-labelledby="posts-title">
+      <div class="section-title">
+        <h2 id="posts-title">Posts</h2>
+      </div>
+
+      <div class="category-grid" aria-label="Blog categories">
+        <article class="category-card">
+          <span>01 / research</span>
+          <h3>Research notes</h3>
+          <p>Browser fingerprinting, Web tracking, measurement methods, reverse engineering, and security/privacy systems in practice.</p>
+        </article>
+        <article class="category-card">
+          <span>02 / cycling</span>
+          <h3>Cycling notes</h3>
+          <p>Training, racing, my journey through the sport, and figuring out where to go from here.</p>
+        </article>
+      </div>
+
+      <div class="post-list">
+        <article class="post">
+          <div class="date general">General</div>
+          <div>
+            <h3><a href="posts/hello-world.html">Hello, World</a></h3>
+            <p>What am I doing here? A short intro to the blog, the kinds of things I hope to write about, and why I wanted a place for research notes, race reports, and assorted tangents.</p>
+            <div class="tags">
+              <span class="tag">general</span>
+              <span class="tag">intro</span>
+              <span class="tag">writing</span>
+            </div>
+          </div>
+        </article>
+
+        <!--
+        <article class="post">
+          <div class="date research">Research</div>
+          <div>
+            <h3><a href="#">What canvas fingerprints look like in the wild</a></h3>
+            <p>Notes from measuring canvas API behavior across the web, including what makes a canvas extraction look tracking-relevant.</p>
+            <div class="tags">
+              <span class="tag">canvas</span>
+              <span class="tag">tracking</span>
+              <span class="tag">measurement</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="post">
+          <div class="date cycling">Cycling</div>
+          <div>
+            <h3><a href="#">Notes from the season</a></h3>
+            <p>Training, racing, recovery, and the occasional observation about how much endurance sports feel like debugging with a heart-rate monitor.</p>
+            <div class="tags">
+              <span class="tag">cycling</span>
+              <span class="tag">training</span>
+              <span class="tag">racing</span>
+            </div>
+          </div>
+        </article>
+        -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Elisa Luo</span>
+    </div>
+  </footer>
+</body>
+</html>

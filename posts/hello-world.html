@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hello, World · Elisa Luo</title>
+  <meta name="description" content="Hello, World — an intro post by Elisa Luo." />
+  <style>
+    :root {
+      --bg: #fbfbf8;
+      --ink: #101010;
+      --muted: #6b6b63;
+      --soft: #ecece4;
+      --accent: #d63f1f;
+      --accent-dark: #8f2413;
+      --blue: #1f4fff;
+      --max: 1180px;
+      --article: 760px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(16,16,16,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(16,16,16,0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+      text-decoration-color: rgba(214, 63, 31, 0.45);
+    }
+
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header { padding: 28px 0; }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .name {
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      font-size: 1.3rem;
+      text-decoration: none;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--soft);
+      border-radius: 999px;
+      background: rgba(251, 251, 248, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-center a {
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    .nav-center a:hover,
+    .nav-center a.active {
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    main { padding: 32px 0 72px; }
+
+    .post-hero {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      color: var(--accent-dark);
+      background: rgba(214, 63, 31, 0.10);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.82;
+      letter-spacing: -0.075em;
+      max-width: 980px;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 30px 0 0;
+      font-size: clamp(1.22rem, 2.1vw, 1.65rem);
+      line-height: 1.28;
+      letter-spacing: -0.03em;
+      color: var(--muted);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(236, 236, 228, 0.8);
+    }
+
+    article {
+      max-width: var(--article);
+      padding: 64px 0 22px;
+      font-size: 1.08rem;
+    }
+
+    article p {
+      margin: 0 0 1.25em;
+    }
+
+    article h2 {
+      margin: 2em 0 0.6em;
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    article strong {
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 32px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 760;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    footer {
+      padding: 40px 0 54px;
+      color: var(--muted);
+      border-top: 1px solid var(--soft);
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .nav-center { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      header { padding: 18px 0; }
+      main { padding-top: 6px; }
+      .post-hero { padding-top: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="name" href="../index.html">Elisa Luo</a>
+      <div class="nav-center">
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#talks">Talks</a>
+        <a href="../index.html#gallery">Elsewhere</a>
+        <a class="active" href="../blog.html">Blog</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="post-hero" aria-labelledby="post-title">
+      <div class="kicker">General</div>
+      <h1 id="post-title">Hello, World</h1>
+      <p class="subtitle">What am I doing here?</p>
+      <div class="meta">
+        <span>May 2026</span>
+        <span>intro</span>
+        <span>writing</span>
+      </div>
+    </section>
+
+    <article>
+      <p>
+        I have wanted to start writing more regularly for a while, which is another way of saying that I have thought about starting a blog for a while and then mostly avoided doing it. So this is me lowering the barrier: a small corner of the internet for research notes, race reports, training thoughts, and assorted things I want to remember before I overthink them.
+      </p>
+
+      <p>
+        My work is mostly about <strong>empirical security and privacy measurement</strong>. Recently, that has meant studying commercial browser fingerprinting, canvas fingerprinting, and modern Web tracking in practice: what systems actually collect, how they behave when deployed on real sites, and how that differs from the cleaner version of the problem that exists in papers, docs, and diagrams.
+      </p>
+
+      <p>
+        I also race bikes, which means a nontrivial amount of my life is spent thinking about training, recovery, equipment choices, race tactics, snacks, and whether a questionable decision was actually character-building. I do not expect every researcher who lands here to care about bike racing, and I do not expect every cyclist to want a post about browser APIs. That split is part of the point.
+      </p>
+
+      <h2>What will go here?</h2>
+
+      <p>
+        Probably a mix of things: explainers on Web privacy and fingerprinting, notes from measurement projects, race reports, training reflections, half-formed observations, and the occasional post that does not fit neatly into either research or cycling. Some posts will be technical. Some will not be. I will try to label them clearly so people can stay in their lane, wander into the other one, or ignore the whole thing entirely.
+      </p>
+
+      <p>
+        I am also treating this as an excuse to practice writing in a lower-stakes format. Academic writing is useful, but it can make every sentence feel like it needs to justify its existence. Race reports have the opposite problem: somehow there is always too much to say about one corner, one attack, one snack, or one bad decision. A blog feels like a useful middle ground.
+      </p>
+
+      <h2>Why now?</h2>
+
+      <p>
+        Because I keep finding myself with notes that are too informal for a paper, too long for a social post, and too interesting to leave in a private document forever. Also because I like reading other people’s process notes — how they approached a project, what confused them, what they tried first, what failed, and what they would do differently next time.
+      </p>
+
+      <p>
+        So: hello, world. This is a place for writing things down, ideally before they become too polished to be useful.
+      </p>
+
+      <a class="back-link" href="../blog.html">← Back to Blog</a>
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Elisa Luo</span>
+    </div>
+  </footer>
+</body>
+</html>
