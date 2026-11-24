@@ -276,6 +276,43 @@
       font-weight: 760;
     }
 
+    .construction-sign {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 34px;
+      padding: 8px;
+      border-radius: 14px;
+      /* caution-tape border */
+      background: repeating-linear-gradient(-45deg, #f5c518 0 14px, #101010 14px 28px);
+      box-shadow: 0 14px 34px rgba(16, 16, 16, 0.12);
+      transform: rotate(-2deg);
+    }
+
+    .construction-sign div {
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: #f5c518;
+      color: #101010;
+      text-align: center;
+    }
+
+    .construction-sign strong {
+      display: block;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .construction-sign span {
+      display: block;
+      margin-top: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.76rem;
+    }
+
     .empty-note {
       padding: 28px;
       border: 1px dashed rgba(107, 107, 99, 0.35);
@@ -330,9 +367,12 @@
     <section class="blog-hero" aria-labelledby="blog-title">
       <span class="kicker">research · cycling · everything in between</span>
       <h1 id="blog-title">Blog</h1>
-      <p class="dek">
-        A mix of research notes, race reports, training thoughts, and occasional tangents — plus an excuse to practice writing.
-      </p>
+      <div class="construction-sign" role="note">
+        <div>
+          <strong>🚧 Under construction 🚧</strong>
+          <span>check back later</span>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="posts-title">
