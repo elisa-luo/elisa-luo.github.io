@@ -99,7 +99,7 @@
     .hero {
       min-height: 70vh;
       display: grid;
-      grid-template-columns: 1fr 340px;
+      grid-template-columns: 1fr 440px;
       gap: 58px;
       align-items: end;
       padding: 44px 0 78px;
@@ -144,18 +144,19 @@
     }
 
     .portrait {
-      border-radius: 999px 999px 28px 28px;
-      overflow: hidden;
-      background: var(--soft);
-      aspect-ratio: 3 / 4;
-      border: 1px solid var(--soft);
+      padding: 4px;
     }
 
     .portrait img {
       width: 100%;
-      height: 100%;
+      height: auto;
       display: block;
-      object-fit: cover;
+      /* soft accent-tinted shadow that follows the cutout's silhouette */
+      filter:
+        drop-shadow(0 2px 4px rgba(214, 63, 31, 0.12))
+        drop-shadow(10px 14px 24px rgba(214, 63, 31, 0.26));
+      /* keep the shadow from spilling below the photo's cropped bottom edge */
+      clip-path: inset(-60px -60px 0 -60px);
     }
 
     .bio-note {
@@ -378,7 +379,7 @@
         grid-template-columns: 1fr;
       }
       .hero { min-height: auto; gap: 34px; align-items: start; }
-      .side-panel { max-width: 380px; }
+      .side-panel { max-width: 440px; }
       .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 190px; }
       .gallery img:first-child { grid-row: span 1; grid-column: span 2; }
     }
@@ -421,19 +422,19 @@
         <span class="kicker">web privacy · measurement · security</span>
         <h1 id="intro-title">Elisa<br />Luo</h1>
         <p class="dek">
-          I’m a PhD student at UC San Diego, advised by <a href="https://cseweb.ucsd.edu/~savage/" target="_blank" rel="noopener">Stefan Savage</a> and <a href="https://cseweb.ucsd.edu/~voelker/" target="_blank" rel="noopener">Geoff Voelker</a>, working on <strong>empirical security and privacy measurement</strong>, with a recent focus on <strong>commercial browser fingerprinting</strong> and <strong>modern Web tracking</strong> in practice.
+          I’m a PhD student at UC San Diego 🌊🏖🏄‍♀️, advised by <a href="https://cseweb.ucsd.edu/~savage/" target="_blank" rel="noopener">Stefan Savage</a> and <a href="https://cseweb.ucsd.edu/~voelker/" target="_blank" rel="noopener">Geoff Voelker</a>, working on <strong>security and privacy measurement</strong>, with a recent focus on commercial browser fingerprinting and modern Web tracking in practice.
         </p>
         <div class="links" aria-label="Profile links">
           <span class="email-text">Email: <a href="mailto:e4luo@ucsd.edu">e4luo@ucsd.edu</a></span>
           <a class="pill" href="https://scholar.google.com/citations?user=iybSu7YAAAAJ&hl=en&authuser=1" target="_blank" rel="noopener">Scholar</a>
           <a class="pill" href="https://github.com/elisa-luo" target="_blank" rel="noopener">GitHub</a>
         </div>
-        <p class="personality-line">Can usually be found <strong>reverse-engineering something new</strong>, racing bikes, or eating oatmeal.</p>
+        <p class="personality-line">Can usually be found reverse-engineering something new, racing bikes, or eating oatmeal.</p>
       </div>
 
       <aside class="side-panel" aria-label="Bio summary">
         <div class="portrait">
-          <img src="images/me.png" alt="Elisa Luo" />
+          <img src="images/me-cutout.png" alt="Elisa Luo" />
         </div>
       </aside>
     </section>
